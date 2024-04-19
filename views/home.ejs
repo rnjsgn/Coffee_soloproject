@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피점 홈페이지</title>
+</head>
+<body>
+    <h1>DB 커피점</h1>
+    <a href="/menu">메뉴판</a>
+    <a href="/menu_ranking">베스트 셀러</a>
+    <% if(user_name){ %>
+        반갑습니다!! <%= user_name %>님
+        <a href="/logout">로그아웃</a>  |
+        <a href="/orderlist">주문 내역확인</a>  |
+        <% if(is_admin){ %>
+            <a href="/supply_reg">공급업체 등록</a>  |
+            <a href="/supply_list">공급업체 내역 확인</a>  |
+            <a href="/mat_list">현 재료 보유량 확인</a>  |
+            <a href="/mat_reg">재료 신청</a>  |
+            <a href="menu_ranking_data">월별 메뉴 판매량 확인</a>
+        <% } %>
+    <% } else { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+    <% } %>
+</body>
+</html>

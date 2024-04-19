@@ -1,0 +1,35 @@
+<!-- menu_ranking.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Ranking</title>
+</head>
+<body>
+    <h1>베스트 메뉴 랭킹</h1>
+    <form action="/submit-statistics" method="post"> <!-- 통계 제출을 위한 form 추가 -->
+        <label for="yearMonth">년월 작성:</label>
+        <input type="text" id="yearMonth" name="yearMonth" placeholder="YYYYMM" required>
+        <button type="submit">통계 제출</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>메뉴 이름</th>
+                <th>판매량</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < rankings.length; i++) { %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= rankings[i].menu_name %></td>
+                    <td><%= rankings[i].order_count %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

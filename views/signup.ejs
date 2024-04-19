@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>회원가입</h1>
+    <a href="/">돌아가기</a>
+    <form action="/signup" method="post"> <!-- POST 요청으로 데이터를 보내는 폼 설정 -->
+        <ul style="list-style: none;">
+          <li>이름 : <input type="text" name="userName"></li>
+          <li>주소 : <input type="text" name="userAddress"></li>
+          <li>휴대폰 번호 : <input type="text" name="userTel"></li>
+          <button type="submit">회원 가입</button>
+        </ul>
+    </form>
+</body>
+</html>

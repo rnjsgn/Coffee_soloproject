@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재료 신청</title>
+</head>
+<body>
+    <h1>재료 신청</h1>
+    <form action="/mat_reg" method="post">
+        <label for="matName">재료 이름:</label>
+        <input type="text" id="matName" name="matName" required>
+
+        <label for="matUnit">주문 단위:</label>
+        <input type="text" id="matUnit" name="matUnit" required>
+
+        <label for="matSheep">주문 양:</label>
+        <input type="number" id="matSheep" name="matSheep" required>
+
+        <button type="submit">재료 신청</button>
+    </form>
+</body>
+</html>

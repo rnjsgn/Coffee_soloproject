@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재료 목록</title>
+    <style>
+        /* 간단한 스타일링 예시 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>DB 커피점 - 재료 목록</h1>
+    <a href="/supply_list">공급업체 목록으로 가기</a>  |
+    <a href="/">홈으로 돌아가기</a>
+    <table>
+        <thead>
+            <tr>
+                <th>재료 이름</th>
+                <th>재료 양</th>
+                <th>재료 단위</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% materials.forEach(material => { %>
+                <tr>
+                    <td><%= material.mat_name %></td>
+                    <td><%= material.mat_has_sheep %></td>
+                    <td><%= material.mat_unit %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

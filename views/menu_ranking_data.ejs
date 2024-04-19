@@ -1,0 +1,32 @@
+<!-- menu_ranking_data.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Ranking Data</title>
+</head>
+<body>
+    <h1>메뉴 월별 랭킹 확인</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>년월</th>
+                <th>순위</th>
+                <th>메뉴 이름</th>
+                <th>판매량</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < rankings.length; i++) { %>
+                <tr>
+                    <td><%= rankings[i].menu_ranking_date %></td>
+                    <td><%= rankings[i].menu_ranking_rank %></td>
+                    <td><%= rankings[i].menu_ranking_menu_name %></td>
+                    <td><%= rankings[i].menu_ranking_menu_count %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

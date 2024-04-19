@@ -1,0 +1,65 @@
+<!-- order.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문 상세 페이지</title>
+</head>
+<body>
+    <h1>주문 상세 페이지</h1>
+
+    <div>
+        <% if (cartItems.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>메뉴 이름</th>
+                        <th>가격</th>
+                        <th>수량</th>
+                        <th>합계</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (const cartItem of cartItems) { %>
+                        <tr>
+                            <td><%= cartItem.cart_menu_name %></td>
+                            <td><%= cartItem.cart_menu_price %></td>
+                            <td><%= cartItem.cart_menu_count %></td>
+                            <td><%= cartItem.cart_menu_price * cartItem.cart_menu_count %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <p>총 가격: <%= totalCartPrice %></p>
+            <p>현재 포인트 보유량: <%= currentUserPoint %>점</p>
+            <p>적립 포인트: <%= pointToAccrue %>점</p>
+
+            <form action="/order" method="post">
+                <label for="paymentMethod">결제 방법 선택:</label>
+                <select name="paymentMethod" id="paymentMethod">
+                    <option value="creditCard">신용카드</option>
+                    <option value="cash">현금</option>
+                    <option value="check">수표</option>
+                </select>
+
+                <input type="hidden" name="totalCartPrice" value="<%= totalCartPrice %>">
+                <input type="hidden" name="pointToAccrue" value="<%= pointToAccrue %>">
+                <input type="hidden" name="currentUserPoint" value="<%= currentUserPoint %>">
+
+                <label for="usePoints">사용할 포인트:</label>
+                <input type="number" name="usePoints" id="usePoints" min="0" max="<%= currentUserPoint %>" step="100" value="0">
+
+                <!-- 사용 가능한 포인트를 표시 -->
+                <p>사용 가능한 포인트: <%= Math.floor(currentUserPoint / 1000) * 1000 %>점</p>
+
+                <button type="submit">주문하기</button>
+            </form>
+        <% } else { %>
+            <p>주문할 항목이 없습니다.</p>
+        <% } %>
+    </div>
+</body>
+</html>
+

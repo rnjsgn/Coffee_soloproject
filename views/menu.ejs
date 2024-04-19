@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <a href="/">돌아가기</a>  |
+    <% if(is_admin){ %>
+    <a href="/menu_reg">메뉴 등록하기</a>  |
+    <% } %>
+    <a href="/cart">장바구니 확인</a>
+
+    <!-- 검색 창 추가 -->
+    <form action="/menu" method="get">
+        <label for="menuSearch">메뉴 검색:</label>
+        <input type="text" id="menuSearch" name="menuSearch" placeholder="메뉴명을 입력하세요" value="<%= searchData %>">
+        <input type="submit" value="검색">
+    </form>
+
+    <table style="text-align: center;">
+        <thead>
+            <tr>
+                <th>메뉴이름</th>
+                <% for (let i = 0; i < data.length; i++) { %>
+                    <th><a href="/menu/<%= data[i].menu_no %>"><%= data[i].menu_name %></a></th>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>가격</td>
+                <% for (let i = 0; i < data.length; i++) { %>
+                <td><%= data[i].menu_price %></td>
+                <% } %>
+            </tr>
+            <tr>
+                <td>카테고리</td>
+                <% for (let i = 0; i < data.length; i++) { %>
+                <td><%= data[i].menu_category %></td>
+                <% } %>
+            </tr>
+            <tr>
+                <td>장바구니 담기</td>
+                <% for (let i = 0; i < data.length; i++) { %>
+                  <td>
+                    <form action="/addtocart" method="post">
+                      <input type="hidden" name="menu_no" value="<%= data[i].menu_no %>">
+                      <input type="submit" value="장바구니 담기">
+                    </form>
+                  </td>
+                <% } %>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

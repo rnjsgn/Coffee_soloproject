@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공급업체 목록</title>
+</head>
+<body>
+    <h1>DB 커피점 - 공급업체 목록</h1>
+    <a href="/">홈으로</a>
+    <ul>
+        <% suppliers.forEach(supplier => { %>
+            <li>
+                <%= supplier.sup_name %> - <%= supplier.sup_add %>
+                <a href="/supply_detail/<%= supplier.sup_no %>">상세보기</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

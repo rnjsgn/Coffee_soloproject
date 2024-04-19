@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문 내역</title>
+    <style>
+        /* 추가된 CSS 스타일 */
+        body {
+            margin: 20px; /* 주문 간격 조절 */
+        }
+
+        div {
+            border: 1px solid #ccc; /* 각 주문을 나누는 테두리 */
+            padding: 10px;
+            margin-bottom: 20px; /* 주문 간격 조절 */
+        }
+    </style>
+</head>
+<body>
+    <h1>주문 내역</h1>
+    <a href="/">홈으로 돌아가기</a>
+    <% if (orderList.length > 0) { %>
+        <% orderList.forEach(order => { %>
+            <div>
+                <p>주문 일시: <%= order.order_day %></p>
+                <p>주문 방식: <%= order.order_pay %></p>
+                <p>총 가격: <%= order.order_total_price %></p>
+
+                <h3>주문된 메뉴</h3>
+                <% if (order.order_menu_list.length > 0) { %>
+                    <ul>
+                        <% order.order_menu_list.forEach(menu => { %>
+                            <li>
+                                <%= menu.order_menu_count %>개 <%= menu.menu_name %> - <%= menu.order_menu_price %>원
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>주문된 메뉴가 없습니다.</p>
+                <% } %>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>주문 내역이 없습니다.</p>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>장바구니</title>
+</head>
+<body>
+    <h1>장바구니</h1>
+
+    <table style="text-align: center;">
+        <thead>
+          <tr>
+            <th>메뉴 이름</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>합계</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% let totalCartPrice = 0; %>
+            <% for (const cartItem of cartItems) { %>
+              <tr>
+                <td><%= cartItem.cart_menu_name %></td>
+                <td><%= cartItem.cart_menu_price %></td>
+                <td>
+                    <button onclick="updateQuantity('<%= cartItem.cart_menu_no %>', -1)">-</button>
+                    <%= cartItem.cart_menu_count %>
+                    <button onclick="updateQuantity('<%= cartItem.cart_menu_no %>', 1)">+</button>
+                </td>
+                <td><span id="total-price-<%= cartItem.cart_menu_no %>"><%= cartItem.cart_menu_price * cartItem.cart_menu_count %></span></td>
+              </tr>
+              <% totalCartPrice += cartItem.cart_menu_price * cartItem.cart_menu_count; %>
+            <% } %>
+          </tbody>
+      </table>
+
+    <p>장바구니 총 금액: <%= totalCartPrice %></p> <!-- 총 금액 출력 -->
+
+    <!-- 주문하기 버튼 추가 -->
+    <button onclick="placeOrder()">주문하기</button><br>
+    <a href="/menu">메뉴로 돌아가기</a>
+</body>
+<script>
+  // 수량 업데이트 함수
+  function updateQuantity(menuNo, amount) {
+      // 서버로 요청 보내기
+      fetch(`/updateQuantity?menuNo=${menuNo}&amount=${amount}`)
+          .then(response => response.json())
+          .then(data => {
+              // 성공적으로 업데이트된 경우 화면 갱신
+              if (data.success) {
+                  const totalSpan = document.getElementById(`total-price-${menuNo}`);
+                  totalSpan.innerText = data.newTotal;
+              }
+          })
+          .catch(error => console.error('수량 업데이트 중 오류 발생:', error));
+  }
+
+  // 주문하기 함수
+  function placeOrder() {
+      // 주문 상세 페이지로 이동
+      window.location.href = '/order';
+  }
+</script>
+</html>
